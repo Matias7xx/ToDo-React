@@ -1,8 +1,21 @@
 import React from 'react'
-
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import IconButton from '../template/IconButton'
 
 export default props => (
-    <div>
-        <h1>Form</h1>
-    </div>
+    <Form>
+        <Row>
+            <Col xs={12} sm={9} md={10}>
+                <Form.Group controlId="description">
+                    <Form.Control type="text" placeholder="Adicione uma tarefa" />
+                </Form.Group>
+            </Col>
+
+            <Col xs={12} sm={3} md={2}>
+                <IconButton bstyle='primary' icon='plus'></IconButton>
+            </Col>
+        </Row>
+    </Form>
 )

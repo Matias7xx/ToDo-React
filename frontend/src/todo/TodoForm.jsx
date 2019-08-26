@@ -9,7 +9,9 @@ export default props => (
         <Row>
             <Col xs={12} sm={9} md={10}>
                 <Form.Group controlId="description">
-                    <Form.Control type="text" placeholder="Adicione uma tarefa" />
+                    <Form.Control type="text" placeholder="Adicione uma tarefa"
+                    onChange={props.handleChange}
+                    value={props.description} />
                 </Form.Group>
             </Col>
 

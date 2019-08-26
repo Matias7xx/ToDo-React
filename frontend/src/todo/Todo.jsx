@@ -5,11 +5,15 @@ import TodoList from './TodoList'
 
 
 export default class Todo extends Component {
+    handleAdd = () => { //Adiciona uma nova tarefa
+        console.log(this)
+    }
+    
     render() {
         return (
             <div>
                 <PageHeader name='Tarefas' small='Cadastro' />
-                <TodoForm />
+                <TodoForm handleAdd={this.handleAdd} />
                 <TodoList />
             </div>
         )

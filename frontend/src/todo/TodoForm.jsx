@@ -14,7 +14,8 @@ export default props => (
             </Col>
 
             <Col xs={12} sm={3} md={2}>
-                <IconButton bstyle='primary' icon='plus'></IconButton>
+                <IconButton bstyle='primary' icon='plus'
+                    onClick={props.handleAdd}></IconButton>
             </Col>
         </Row>
     </Form>

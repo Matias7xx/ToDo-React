@@ -23,11 +23,13 @@ export default class Todo extends Component {
             .then(resp => console.log(resp.data))
     }*/
 
-    refresh = async() => { //Refresh com Async Await
+    refresh = async(description = '') => { //Refresh com Async Await
         try {
-            const response = await axios.get(`${URL}?sort=-createdAt`)
+            const search = description ? `&description__regex=/${description}/` : '' //Se for usar o search
+
+            const response = await axios.get(`${URL}?sort=-createdAt${search}`)
         
-            this.setState({...this.state, description: '', list: response.data })
+            this.setState({...this.state, description, list: response.data })
         } catch (err) {
             console.log('Erro:', err);
         }
@@ -61,7 +63,7 @@ export default class Todo extends Component {
     handleRemove = async(todo) => { //Remoção
         try{
             await axios.delete(`${URL}/${todo._id}`)
-            this.refresh()
+            this.refresh(this.state.description)
         } catch(err) {
             console.log('Erro:', err)
         }
@@ -70,7 +72,7 @@ export default class Todo extends Component {
     handleMarkAsDone = async(todo) => { //Alterar tarefa como CONCLUÍDA
         try{
             await axios.put(`${URL}/${todo._id}`, {...todo, done: true})
-            this.refresh()
+            this.refresh(this.state.description)
         } catch(err) {
             console.log('Erro:', err)
         }
@@ -79,10 +81,14 @@ export default class Todo extends Component {
     handleMarkAsPending = async(todo) => { //Alterar tarefa como PENDENTE
         try{
             await axios.put(`${URL}/${todo._id}`, {...todo, done: false})
-            this.refresh()
+            this.refresh(this.state.description)
         } catch(err) {
             console.log('Erro:', err)
         }
+    }
+
+    handleSearch = async() => { //Função para SEARCH(filtrar alguma tarefa)
+        this.refresh(this.state.description)
     }
     
     render() {
@@ -92,7 +98,8 @@ export default class Todo extends Component {
                 <TodoForm 
                     description={this.state.description}
                     handleChange={this.handleChange}
-                    handleAdd={this.handleAdd} />
+                    handleAdd={this.handleAdd}
+                    handleSearch={this.handleSearch} />
                 <TodoList
                     list={this.state.list}
                     handleMarkAsDone={this.handleMarkAsDone}

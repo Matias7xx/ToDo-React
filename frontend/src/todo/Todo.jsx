@@ -47,14 +47,17 @@ export default class Todo extends Component {
 
     handleAdd = async() => { //handleAdd com Async Await
         try {
-            const response = await axios.post(URL, {
-            description: this.state.description.trim()
+            if(this.state.description === '') {
+                alert('Insira uma tarefa !')
+            } else {
+                const response = await axios.post(URL, {
+                description: this.state.description.trim()
             })
 
             console.log('Informações', response.data)
 
             this.refresh()
-    
+            }
         } catch (err) {
             console.log('Erro:', err);
         }

@@ -8,19 +8,54 @@ import TodoList from './TodoList'
 const URL = 'http://localhost:3003/api/todos'
 export default class Todo extends Component {
 
+    constructor(props) {
+        super(props)
+        this.refresh()
+    }
+
     state = { //Estado do componente
         description: '',
         list: []
     }
 
-    handleChange = (e) => { //Recebe o evento sempre que o usuário digitar no input
-        this.setState({...this.state, description: e.target.value}) //Att o estado
+    /*refresh = () => { //Atualizar a lista com a data mais recente para a mais antiga
+        axios.get(`${URL}?sort=-createdAt`)
+            .then(resp => console.log(resp.data))
+    }*/
+
+    refresh = async() => { //Refresh com Async Await
+        try {
+            const response = await axios.get(`${URL}?sort=-createdAt`)
+        
+            this.setState({...this.state, description: '', list: response.data })
+        } catch (err) {
+            console.log('Erro:', err);
+        }
+        }
+
+    handleChange = async(e) => { //Recebe o evento sempre que o usuário digitar no input
+        await this.setState({...this.state, description: e.target.value}) //Att o estado
     }
 
-    handleAdd = () => { //Adiciona uma nova tarefa
+    /*handleAdd = () => { //Adiciona uma nova tarefa
         const description = this.state.description
         axios.post(URL, { description })
             .then(resp => console.log('Funcionou'))
+    }*/
+
+    handleAdd = async() => { //handleAdd com Async Await
+        try {
+            const response = await axios.post(URL, {
+            description: this.state.description.trim()
+            })
+
+            console.log('Informações', response.data)
+
+            this.refresh()
+    
+        } catch (err) {
+            console.log('Erro:', err);
+        }
     }
     
     render() {
@@ -30,7 +65,7 @@ export default class Todo extends Component {
                 <TodoForm description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd} />
-                <TodoList />
+                <TodoList list={this.state.list} />
             </div>
         )
     }

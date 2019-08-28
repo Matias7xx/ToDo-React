@@ -57,6 +57,15 @@ export default class Todo extends Component {
             console.log('Erro:', err);
         }
     }
+
+    handleRemove = async(todo) => { //Remoção
+        try{
+            await axios.delete(`${URL}/${todo._id}`)
+            this.refresh()
+        } catch(err) {
+            console.log('Erro:', err)
+        }
+    }
     
     render() {
         return (
@@ -65,7 +74,8 @@ export default class Todo extends Component {
                 <TodoForm description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd} />
-                <TodoList list={this.state.list} />
+                <TodoList list={this.state.list}
+                    handleRemove={this.handleRemove}/>
             </div>
         )
     }

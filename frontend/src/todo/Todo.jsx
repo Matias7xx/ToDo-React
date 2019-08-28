@@ -88,7 +88,19 @@ export default class Todo extends Component {
     }
 
     handleSearch = async() => { //Função para SEARCH(filtrar alguma tarefa)
-        this.refresh(this.state.description)
+        try{
+        await this.refresh(this.state.description)
+        } catch(err) {
+            console.log('Erro:', err)
+        }
+    }
+
+    handleClear = async() => { //Limpar o input
+        try{
+        await this.refresh()
+        } catch(err) {
+            console.log('Erro:', err)
+        }
     }
     
     render() {
@@ -99,7 +111,8 @@ export default class Todo extends Component {
                     description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd}
-                    handleSearch={this.handleSearch} />
+                    handleSearch={this.handleSearch}
+                    handleClear={this.handleClear} />
                 <TodoList
                     list={this.state.list}
                     handleMarkAsDone={this.handleMarkAsDone}

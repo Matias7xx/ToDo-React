@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import IconButton from '../template/IconButton'
 
 export default props => (
-    <Form>
+    <Form className='todoForm'>
         <Row>
             <Col xs={12} sm={9} md={10}>
                 <Form.Group controlId="description">
@@ -20,6 +20,8 @@ export default props => (
                     onClick={props.handleAdd}></IconButton>
                 <IconButton bstyle='info' icon='search'
                     onClick={props.handleSearch}></IconButton>
+                <IconButton bstyle='secondary' icon='close'
+                    onClick={props.handleClear}></IconButton>
             </Col>
         </Row>
     </Form>

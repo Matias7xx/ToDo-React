@@ -6,3 +6,15 @@
     text-decoration: line-through;
     color: lime;
 }
+
+.tableActions {
+    width: 115px;
+}
+
+.todoForm {
+    padding-bottom: 50px;
+}
+
+body {
+    background-color: #efefef;
+}

@@ -66,15 +66,37 @@ export default class Todo extends Component {
             console.log('Erro:', err)
         }
     }
+
+    handleMarkAsDone = async(todo) => { //Alterar tarefa como CONCLUÍDA
+        try{
+            await axios.put(`${URL}/${todo._id}`, {...todo, done: true})
+            this.refresh()
+        } catch(err) {
+            console.log('Erro:', err)
+        }
+    }
+
+    handleMarkAsPending = async(todo) => { //Alterar tarefa como PENDENTE
+        try{
+            await axios.put(`${URL}/${todo._id}`, {...todo, done: false})
+            this.refresh()
+        } catch(err) {
+            console.log('Erro:', err)
+        }
+    }
     
     render() {
         return (
             <div>
                 <PageHeader name='Tarefas' small='Cadastro' />
-                <TodoForm description={this.state.description}
+                <TodoForm 
+                    description={this.state.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd} />
-                <TodoList list={this.state.list}
+                <TodoList
+                    list={this.state.list}
+                    handleMarkAsDone={this.handleMarkAsDone}
+                    handleMarkAsPending={this.handleMarkAsPending}
                     handleRemove={this.handleRemove}/>
             </div>
         )

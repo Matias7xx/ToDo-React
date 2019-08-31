@@ -1,8 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Table from 'react-bootstrap/Table'
 import IconButton from '../template/IconButton'
 
-export default props => {
+const TodoList = props => {
     //Função que vai renderizar as linhas da tabela
     const renderRows = () => {
         const list = props.list || []
@@ -37,3 +38,9 @@ export default props => {
         </Table>
     )
 }
+
+//Mapear estado do Redux
+const mapStateToProps = state => ({
+    list: state.todo.list //VEM DO REDUCER
+});
+export default connect(mapStateToProps)(TodoList) //Conectar Redux

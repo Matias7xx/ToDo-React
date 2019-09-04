@@ -9,7 +9,9 @@ import App from  './main/App'
 import reducers from './main/reducers' //Redux Reducers
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(reducers)
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ //Utilizar o devTools do chrome
+    && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStore(reducers, devTools)
 ReactDOM.render(
     <Provider store={store}>
         <App />

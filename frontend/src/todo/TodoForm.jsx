@@ -3,8 +3,9 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import IconButton from '../template/IconButton'
+import { connect } from 'react-redux'
 
-export default props => {
+const TodoForm = props => {
 
     const keyHandler = (e) => { //Teclas de atalho
         if(e.key === 'Enter') {
@@ -39,3 +40,8 @@ export default props => {
     )
     
 }
+
+const mapStateToProps = state => ({
+    description: state.todo.description
+})
+export default connect(mapStateToProps)(TodoForm)

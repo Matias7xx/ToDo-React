@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
 //import App from './App';
-import { createStore } from 'redux'; //REDUX
+import { applyMiddleware, createStore } from 'redux'; //REDUX - Redux-Promise
 import { Provider } from 'react-redux' //Integração entre React e Redux
+import promise from 'redux-promise' //Redux Promise
+
 
 import App from  './main/App'
 import reducers from './main/reducers' //Redux Reducers
@@ -11,7 +13,7 @@ import * as serviceWorker from './serviceWorker';
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ //Utilizar o devTools do chrome
     && window.__REDUX_DEVTOOLS_EXTENSION__()
-const store = createStore(reducers, devTools)
+const store = applyMiddleware(promise)(createStore)(reducers, devTools)
 ReactDOM.render(
     <Provider store={store}>
         <App />

@@ -1,9 +1,13 @@
 import React from 'react'
+
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import IconButton from '../template/IconButton'
+
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { changeDescription } from './todoActions'
 
 const TodoForm = props => {
 
@@ -21,7 +25,7 @@ const TodoForm = props => {
                 <Col xs={12} sm={9} md={10}>
                     <Form.Group controlId="description">
                         <Form.Control type="text" placeholder="Adicione uma tarefa"
-                        onChange={props.handleChange}
+                        onChange={props.changeDescription}
                         onKeyUp={keyHandler}
                         value={props.description} />
                     </Form.Group>
@@ -44,4 +48,6 @@ const TodoForm = props => {
 const mapStateToProps = state => ({
     description: state.todo.description
 })
-export default connect(mapStateToProps)(TodoForm)
+const mapDispatchToProps = dispatch => //Dispara a ação e passa ela para os reducers
+    bindActionCreators({ changeDescription }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)

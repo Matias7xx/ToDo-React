@@ -32,3 +32,17 @@ export const add = (description) => { //Adicionar tarefa COM THUNK(Promise)
             .then(ress => dispatch(search()))
     }
 }
+
+export const markAsDone = (todo) => { //Marcar como concluido
+    return dispatch => {
+        axios.put(`${URL}/${todo._id}`, { ...todo, done: true })
+            .then(resp => dispatch(search()))
+    }
+}
+
+export const markAsPending = (todo) => { //Marcar como pendente
+    return dispatch => {
+        axios.put(`${URL}/${todo._id}`, { ...todo, done: false })
+            .then(resp => dispatch(search()))
+    }
+}

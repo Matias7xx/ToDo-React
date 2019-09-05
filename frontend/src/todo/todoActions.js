@@ -28,28 +28,32 @@ export const search = () => {
 export const add = (description) => { //Adicionar tarefa COM THUNK(Promise)
     return dispatch => {
         axios.post(URL, { description })
-            .then(resp => dispatch({ type: 'TODO_ADDED', payload: resp.data }))
+            .then(resp => dispatch(clear()))
             .then(ress => dispatch(search()))
     }
 }
 
-export const markAsDone = (todo) => { //Marcar como concluido
+export const markAsDone = (todo) => { //Marcar como concluido //MIDDLEWARE THUNK
     return dispatch => {
         axios.put(`${URL}/${todo._id}`, { ...todo, done: true })
             .then(resp => dispatch(search()))
     }
 }
 
-export const markAsPending = (todo) => { //Marcar como pendente
+export const markAsPending = (todo) => { //Marcar como pendente //MIDDLEWARE THUNK
     return dispatch => {
         axios.put(`${URL}/${todo._id}`, { ...todo, done: false })
             .then(resp => dispatch(search()))
     }
 }
 
-export const remove = (todo) => {
+export const remove = (todo) => { //Remover TODO MIDDLEWARE THUNK
     return dispatch => {
         axios.delete(`${URL}/${todo._id}`)
             .then(resp => dispatch(search()))
     }
+}
+
+export const clear = () => { //Limpar o campo
+    return { type: 'TODO_CLEAR' }
 }

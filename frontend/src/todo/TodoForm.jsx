@@ -7,7 +7,7 @@ import IconButton from '../template/IconButton'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { add, changeDescription, search } from './todoActions'
+import { add, changeDescription, search, clear } from './todoActions'
 
 class TodoForm extends Component {
 
@@ -20,7 +20,7 @@ class TodoForm extends Component {
         if(e.key === 'Enter') {
             e.shiftKey ? search() : add(description)
         } else if (e.key === 'Escape') {
-            this.props.handleClear()
+            this.props.clear()
         }
     }
 
@@ -44,7 +44,7 @@ class TodoForm extends Component {
                     <IconButton bstyle='info' icon='search'
                         onClick={() => search()}></IconButton>
                     <IconButton bstyle='secondary' icon='close'
-                        onClick={this.props.handleClear}></IconButton>
+                        onClick={this.props.clear}></IconButton>
                 </Col>
             </Row>
         </Form>
@@ -56,5 +56,5 @@ const mapStateToProps = state => ({
     description: state.todo.description
 })
 const mapDispatchToProps = dispatch => //Dispara a ação e passa ela para os reducers
-    bindActionCreators({ add, changeDescription, search }, dispatch);
+    bindActionCreators({ add, changeDescription, search, clear }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(TodoForm)

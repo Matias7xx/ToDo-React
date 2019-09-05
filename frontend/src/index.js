@@ -7,7 +7,7 @@ import { Provider } from 'react-redux' //Integração entre React e Redux
 
 import promise from 'redux-promise' //Redux Promise
 import multi from 'redux-multi' //Promise que vai fazer uma pesquisa sempre que uma nova tarefa for adicionada
-
+import thunk from 'redux-thunk'
 
 import App from  './main/App'
 import reducers from './main/reducers' //Redux Reducers
@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ //Utilizar o devTools do chrome
     && window.__REDUX_DEVTOOLS_EXTENSION__()
-const store = applyMiddleware(multi, promise)(createStore)(reducers, devTools)
+const store = applyMiddleware(thunk, multi, promise)(createStore)(reducers, devTools)
 ReactDOM.render(
     <Provider store={store}>
         <App />

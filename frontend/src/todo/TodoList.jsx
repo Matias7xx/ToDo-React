@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import Table from 'react-bootstrap/Table'
 import IconButton from '../template/IconButton'
-import { markAsDone, markAsPending } from './todoActions'
+import { markAsDone, markAsPending, remove } from './todoActions'
 
 const TodoList = props => {
     //Função que vai renderizar as linhas da tabela
@@ -21,7 +21,7 @@ const TodoList = props => {
                     <IconButton bstyle='warning' icon='undo' hide={!todo.done}
                         onClick={() => props.markAsPending(todo)}></IconButton>
                     <IconButton bstyle='danger' icon='trash-o' hide={!todo.done}
-                    onClick={() => props.handleRemove(todo)}></IconButton>
+                    onClick={() => props.remove(todo)}></IconButton>
                 </td>
             </tr>
         ))
@@ -47,5 +47,5 @@ const mapStateToProps = state => ({
     list: state.todo.list //VEM DO REDUCER
 });
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ markAsDone, markAsPending }, dispatch);
+    bindActionCreators({ markAsDone, markAsPending, remove }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList) //Conectar Redux

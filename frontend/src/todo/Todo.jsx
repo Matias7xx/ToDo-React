@@ -7,7 +7,7 @@ import TodoList from './TodoList'
 
 const URL = 'http://localhost:3003/api/todos'
 export default class Todo extends Component {
-
+    //***APÓS A MIGRACÃO PARA REDUX, NÃO SERÁ NECESSÁRIO O USO DE NENHUM MÉTODO DESTA CLASSE !!!
     constructor(props) {
         super(props)
         this.refresh()
@@ -111,16 +111,18 @@ export default class Todo extends Component {
             <div>
                 <PageHeader name='Tarefas' small='Cadastro' />
                 <TodoForm 
-                    description={this.state.description}
-                    handleChange={this.handleChange}
-                    handleAdd={this.handleAdd}
-                    handleSearch={this.handleSearch}
-                    handleClear={this.handleClear} />
+                    //description={this.state.description}
+                    //handleChange={this.handleChange}
+                    //handleAdd={this.handleAdd}
+                    //handleSearch={this.handleSearch}
+                    //handleClear={this.handleClear} 
+                    />
                 <TodoList
                     //list={this.state.list} //Não é necessário ao usar Redux
-                    handleMarkAsDone={this.handleMarkAsDone}
-                    handleMarkAsPending={this.handleMarkAsPending}
-                    handleRemove={this.handleRemove}/>
+                    //handleMarkAsDone={this.handleMarkAsDone}
+                    //handleMarkAsPending={this.handleMarkAsPending}
+                    //handleRemove={this.handleRemove}
+                    />
             </div>
         )
     }
